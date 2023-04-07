@@ -29,19 +29,33 @@
                             for (int i = 0; i < WordService.Words.Count; i++)
                             {
                                 var word = WordService.Words[i];
+                                var definitions = word.Definition?.Split(';', StringSplitOptions.RemoveEmptyEntries);
                                 builder.Append(word.Name);
                                 builder.Append(i);
-                                        <button class="list-group-item search-entry text-start pb-1">
-                                            <div class="container-md-2">
-                                                <h3 class="de-word">@word.Name</h3>
-                                                <p class="de-class">@word.Class.ToString()</p>
-                                                <p class="de-def">@word.Definition</p>
-                                            </div>
-                                            <div class="container-md-2">
-                                                <a class="float-start text-start" href="#">View More Info</a>
-                                                <p class="float-end">Common</p>
-                                            </div>
-                                        </button>
+                                <button class="list-group-item search-entry text-start pb-2">
+                                    <!--Word and Definition(s)-->
+                                    <div class="container-md-2">
+                                        <h3 class="de-word fw-semibold">@word.Name</h3>
+                                        @{
+                                            var index = 1;
+                                            foreach(string definition in definitions!)
+                                            {
+                                                var indexString = $"{index}. {definition}";
+                                                <p class="de-def p-0 m-0">@indexString</p>
+                                                index++;
+                                            }
+                                        }
+                                    </div>
+                                    <!--Example Sentences-->
+                                    <div class="container-md-2">
+                                    
+                                    </div>
+                                    <!--Miscellaneous-->
+                                    <div class="container-md-2 pt-2">
+                                        <a class="float-start text-start" href="#">View More Info</a>
+                                        <p class="float-end">Common</p>
+                                    </div>
+                                </button>
                                 builder.Clear();
                             }
                         }

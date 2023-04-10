@@ -150,7 +150,11 @@ menu-selection h4 {
 }
 
 div.bd-main-interface {
-    padding: 1rem 1vh;
+    padding: 0px 0px;
+}
+
+div.bd-interface-body{
+    max-height: 100vh !important
 }
 
 div.interface-header {

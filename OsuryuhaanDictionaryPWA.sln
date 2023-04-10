@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuryuhaanDictionaryPWAProj.Server", "OsuryuhaanDictionaryPWAProj\Server\OsuryuhaanDictionaryPWAProj.Server.csproj", "{0A4598FC-641C-4EE4-BDC5-49AAD86F55E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuryuhaanDictionaryPWAProj.Server", "OsuryuhaanDictionaryPWAProj\Server\OsuryuhaanDictionaryPWAProj.Server.csproj", "{0A4598FC-641C-4EE4-BDC5-49AAD86F55E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuryuhaanDictionaryPWAProj.Client", "OsuryuhaanDictionaryPWAProj\Client\OsuryuhaanDictionaryPWAProj.Client.csproj", "{B95E74BF-F9E2-4F62-8FBB-99DDB3AECF76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuryuhaanDictionaryPWAProj.Client", "OsuryuhaanDictionaryPWAProj\Client\OsuryuhaanDictionaryPWAProj.Client.csproj", "{B95E74BF-F9E2-4F62-8FBB-99DDB3AECF76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuryuhaanDictionaryPWAProj.Shared", "OsuryuhaanDictionaryPWAProj\Shared\OsuryuhaanDictionaryPWAProj.Shared.csproj", "{FC6DADB8-0D6E-4DE2-896F-295EFF8A9732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuryuhaanDictionaryPWAProj.Shared", "OsuryuhaanDictionaryPWAProj\Shared\OsuryuhaanDictionaryPWAProj.Shared.csproj", "{FC6DADB8-0D6E-4DE2-896F-295EFF8A9732}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

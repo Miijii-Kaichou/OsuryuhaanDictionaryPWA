@@ -1,10 +1,13 @@
 ﻿@page "/"
-
+@inject IWordService WordService;
 <PageTitle>Dashboard</PageTitle>
 
+<link rel="stylesheet" href="~/css/app.css"/>
 <div class="bd-main-interface">
-    <link rel="stylesheet" href="~/css/app.css"/>
-    <main class="bd-interface-body justify-content-md-center">
+    <div class="interface-header container-fluid text-end bg-light-gray">
+         <div class="display-6 fw-semibold me-4">Dashboard</div>
+    </div>
+    <div class="bd-interface-body justify-content-md-center">
         <!--Word of the day and statistics of how many words exist of each category.-->
         <div class="container-fluid" id="top-section">
             <div class="row flex-row pb-4">
@@ -15,8 +18,8 @@
                         </div>
                         <div class="card-body">
                             <div id="new-word">
-                                <p class="display-5">TBD</p>
-                                <p class="display-6">There is no definition for this word.</p>
+                                <p class="display-5">@WordService.WordOfTheDay?.Name</p>
+                                <p class="display-6">@WordService.WordOfTheDay?.Definition</p>
                             </div>
                         </div>
                     </div>
@@ -40,10 +43,10 @@
                     <div class="card-body" style="overflow-y: auto;">
                         <div class="list-group list-group-flush" id="search-list">
                             @{
-                                for(int i =0; i < MaxRecentSearchCount; i++)
+                                for(int i =0; i < WordService.Words.Count; i++)
                                 {
                                     <button class="list-group-item text-start search-entry">
-                                        <p class="text-start ms-3">Search Entry @i</p>
+                                        <p class="text-start ms-3">@WordService.Words[i].Name</p>
                                     </button>
                                 }
                             }
@@ -52,13 +55,21 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 </div>
 
 @code {
     private const int MaxRecentSearchCount = 15;
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        MainLayout.ChangeHeaderName("Dashboard");
+        await Task.Run(() => MainLayout.ChangeHeaderName("Dashboard"));
+        
+        Task task = WordService.GetWords();
+        await task;
+
+        if (task.IsCompletedSuccessfully){
+            await WordService.GenerateWordOfTheDay();
+            return;
+        }
     }
 }

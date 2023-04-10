@@ -1,0 +1,19 @@
+﻿@page "/word-list"
+@inject IWordService WordService;
+
+<link rel="stylesheet" href="~/css/app.css"/>
+<div class="bd-main-interface">
+    <div class="interface-header container-fluid text-end bg-light-gray">
+        <div class="display-6 fw-semibold me-4">Word List</div>
+    </div>
+    <div class="bd-interface-body">
+
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        MainLayout.ChangeHeaderName("Word List");
+    }
+}

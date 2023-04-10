@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject AppState _AppState;
+@inject IWordService WordService;
 @implements IDisposable;
 
 <link rel="stylesheet" href="~/css/app.css"/>
@@ -19,9 +20,6 @@
                 <span class="navbar-toggler-icon"/>
             </button>
         </div>
-    </div>
-    <div class="interface-header container-fluid text-end bg-light-gray">
-        <div class="display-6 fw-semibold me-4">@_AppState.CurrentViewName</div>
     </div>
 
     <Offcanvas @ref="offcanvas"

@@ -4,9 +4,13 @@
 @inject IWordService WordService;
 
 <PageTitle>Search</PageTitle>
+
 <link rel="stylesheet" href="~/css/app.css"/>
 <div class="bd-main-interface">
-    <main class="bd-interface-body h-100 justify-content-md-center pt-4">
+    <div class="interface-header container-fluid text-end bg-light-gray">
+         <div class="display-6 fw-semibold me-4">Search</div>
+    </div>
+    <div class="bd-interface-body h-100 justify-content-md-center pt-4">
         <div class="container-fluid d-flex justify-content-sm-center mb-4" id="searchbar">
             <div class="btn-toolbar" role="toolbar" aria-label="SearchBar" >
                 <div class="input-group" style="width: 75vw;">
@@ -53,7 +57,7 @@
                                     <!--Miscellaneous-->
                                     <div class="container-md-2 pt-2">
                                         <a class="float-start text-start" href="#">View More Info</a>
-                                        <p class="float-end">Common</p>
+                                        <p class="float-end">@word.Relevancy.Humanize(LetterCasing.Title)</p>
                                     </div>
                                 </button>
                                 builder.Clear();
@@ -63,17 +67,12 @@
                 </div>      
             </div>
         </div>
-    </main>
+    </div>
 </div>
 
 @code {
     protected override void OnInitialized()
     {
         MainLayout.ChangeHeaderName("Search");
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        await WordService.GetWords();
     }
 }

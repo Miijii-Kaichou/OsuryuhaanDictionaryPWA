@@ -2,6 +2,9 @@
 {
     public sealed class AppState
     {
+        // Collections of words.
+        public static Word[]? Words;
+
         public string CurrentViewName { get; private set; }
         public event Action? StateChanged;
         public AppState()

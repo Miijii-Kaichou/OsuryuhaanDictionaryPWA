@@ -4,6 +4,7 @@
 @implements IDisposable;
 
 <link rel="stylesheet" href="~/css/app.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 <div class="page justify-content-md-center">
 <!--Title Header-->
     <div class="navbar navbar-dark bg-dark">
@@ -36,27 +37,27 @@
         <BodyTemplate>
             <div class="row flex-row justify-content-sm-center">
                 <div class="container-fluid d-inline-flex">
-                    <a class="ms-2 mb-4 fs-4 menu-selection" href="" @onclick="OnHideOffcanvasClick">Dashboard</a>
+                    <a class="ms-2 mb-4 fs-4 menu-selection" href="" @onclick="OnHideOffcanvasClick"><i class="bi bi-house pe-3"></i>Dashboard</a>
                 </div>
             </div>
             <div class="row flex-row justify-content-sm-center">
                 <div class="container-fluid d-inline-flex">
-                    <a class="ms-2 mb-4 fs-4 menu-selection" href="search" @onclick="OnHideOffcanvasClick">Search</a>
+                    <a class="ms-2 mb-4 fs-4 menu-selection" href="search" @onclick="OnHideOffcanvasClick"><i class="bi bi-search pe-3"></i>Dictionary</a>
                 </div>
             </div>
             <div class="row flex-row justify-content-sm-center">
                 <div class="container-fluid d-inline-flex">
-                    <a class="ms-2 mb-4 fs-4 menu-selection" href="notes" @onclick="OnHideOffcanvasClick">Notes</a>
+                    <a class="ms-2 mb-4 fs-4 menu-selection" href="notes" @onclick="OnHideOffcanvasClick"><i class="bi bi-journals pe-3"></i>Notes</a>
                 </div>
             </div>
             <div class="row flex-row justify-content-sm-center">
                 <div class="container-fluid d-inline-flex">
-                    <a class="ms-2 mb-4 fs-4 menu-selection" href="word-list" @onclick="OnHideOffcanvasClick">List</a>
+                    <a class="ms-2 mb-4 fs-4 menu-selection" href="word-list" @onclick="OnHideOffcanvasClick"><i class="bi bi-list pe-3"></i>Word List</a>
                 </div>
             </div>
             <div class="row flex-row justify-content-sm-center">
                 <div class="container-fluid d-inline-flex">
-                    <a class="ms-2 mb-4 fs-4 menu-selection" href="preferences" @onclick="OnHideOffcanvasClick">Preferences</a>
+                    <a class="ms-2 mb-4 fs-4 menu-selection" href="preferences" @onclick="OnHideOffcanvasClick"><i class="bi bi-sliders pe-3"></i>Preferences</a>
                 </div>
             </div>
         </BodyTemplate>

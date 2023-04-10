@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Internal\NoteDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazor.Bootstrap" Version="1.6.0" />
     <PackageReference Include="Humanizer.Core" Version="2.14.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.14" />
@@ -25,6 +29,18 @@
   <ItemGroup>
     <Folder Include="Components\" />
     <Folder Include="Services\SearchService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Internal\NoteDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Internal\NoteDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Internal\Notes\NoteDetails.razor" />
   </ItemGroup>
 
 </Project>

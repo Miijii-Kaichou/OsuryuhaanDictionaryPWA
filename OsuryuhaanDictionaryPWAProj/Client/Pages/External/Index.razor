@@ -9,6 +9,39 @@
          <div class="display-6 fw-semibold me-4">Dashboard</div>
     </div>
     <div class="bd-interface-body justify-content-md-center">
+        <div class="container-fluid">
+            <div id="settingsControl" class="row flex-row d-inline-flex ps-4 pt-4">
+                <div class="container d-flex col">
+                    <label class="form-check-label pe-2" for="cloud-switch-check">Enable Cloud Sync</label>
+                    <div class="form-check form-switch"id="enable-cloud-option">
+                        <input class="form-check-input form-check-input float-end" type="checkbox" role="switch" id="cloud-switch-check" checked/>
+                    </div>
+                </div>
+                <div class="container d-flex col-2">
+                    <label class="form-check-label pe-2" for="adv-search-switch-check">Advance Search</label>
+                    <div class="form-check form-switch"id="advance-search-option">
+                        <input class="form-check-input form-check-input float-end" type="checkbox" role="switch" id="adv-search-switch-check" checked/>
+                    </div>
+                </div>
+                <div class="container d-flex col-4">
+                    <label class="form-check-label" for="study-time-check">Study Time A Day</label>
+                    <div class="form-check form-switch"id="enable-cloud-study-time-option">
+                        <select class="form-select" id="study-time-check">
+                            <option selected>5 Minutes</option>
+                            <option selected>10 Minutes</option>
+                            <option selected>30 Minutes</option>
+                            <option selected>1 Hour</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="container d-flex col">
+                    <label class="form-check-label pe-2" for="theme-check">Dark Theme</label>
+                    <div class="form-check form-switch"id="app-theme-option">
+                        <input class="form-check-input form-check-input float-end" type="checkbox" role="switch" id="theme-check"/>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Word of the day and statistics of how many words exist of each category.-->
         <div class="container-fluid" id="top-section">
             <div class="row row-cols-md-1 row-cols-lg-2 flex-row row-cols-1 pb-4">

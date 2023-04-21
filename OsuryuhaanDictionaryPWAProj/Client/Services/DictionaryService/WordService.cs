@@ -1,5 +1,4 @@
 ﻿using OsuryuhaanDictionaryPWAProj.Server.Data.Enums;
-using OsuryuhaanDictionaryPWAProj.Server.Entities;
 using OsuryuhaanDictionaryPWAProj.Shared.Data.Enums;
 using System.Net.Http.Json;
 
@@ -45,17 +44,16 @@ namespace OsuryuhaanDictionaryPWAProj.Client.Services.DictionaryService
             {
                 if (Words == null) return;
                 if (Words.Count == 0) return;
+                int maxIndex = Words.Count - 1;
                 var seed = DateTime.Now.Date.Day;
                 Random random = new(seed);
-                var index = random.Next(Words.Count) - 1;
-                if (index > Words.Count - 1)
+                var index = random.Next(Words.Count);
+                if (index > maxIndex)
                 {
-                    WordOfTheDay = Words[0];
-                    Console.WriteLine("First Case");
+                    WordOfTheDay = Words[maxIndex];
                     return;
                 }
                 WordOfTheDay = Words[index];
-                Console.WriteLine($"Word of the day: {WordOfTheDay.Name}");
             });
         }
     }

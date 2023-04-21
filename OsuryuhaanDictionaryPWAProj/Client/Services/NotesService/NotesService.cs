@@ -1,12 +1,15 @@
-﻿namespace OsuryuhaanDictionaryPWAProj.Client.Services.NotesService
+﻿using BlazorBootstrap;
+
+namespace OsuryuhaanDictionaryPWAProj.Client.Services.NotesService
 {
     public sealed class NotesService : INotesService
     {
-        public NoteModel? currentViewingNote { get; set; } = new NoteModel();
-        public NoteModel[] noteModels { get; set; } =
+        public NoteModel? currentViewingNote { get; set; }
+        public List<NoteModel> noteModels { get; set; } = new()
         {
             new()
             {
+                Id = 0,
                 Title = "Lorem Ipsum 10 Paragraph Version",
                 Subtitle = "Using the most favorite string of characters to represent this note.",
                 Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum a arcu cursus vitae congue mauris rhoncus aenean. Posuere urna nec tincidunt praesent. Morbi non arcu risus quis varius quam quisque id. Ut faucibus pulvinar elementum integer enim neque volutpat. Ipsum consequat nisl vel pretium lectus quam. A diam maecenas sed enim ut sem. Varius morbi enim nunc faucibus a pellentesque sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam. Vel risus commodo viverra maecenas accumsan lacus vel facilisis. Commodo viverra maecenas accumsan lacus vel facilisis. Neque gravida in fermentum et. Sollicitudin tempor id eu nisl nunc. Non blandit massa enim nec dui nunc mattis. Consectetur adipiscing elit duis tristique sollicitudin nibh sit. Sed risus ultricies tristique nulla aliquet enim tortor at auctor. Dolor morbi non arcu risus."
@@ -39,6 +42,7 @@
             },
             new()
             {
+                Id = 1,
                 Title = "Testing Model Binding",
                 Subtitle = "Learning More About Blazor Today",
                 Content = string.Empty,
@@ -58,6 +62,59 @@
         public async Task GetNotes()
         {
 
+        }
+
+        public void AddNewNote()
+        {
+            NoteModel newModel = new()
+            {
+                Id = noteModels.Count,
+                Title = RenameIfDuplicate("Untitled"),
+                Subtitle = string.Empty,
+                Content = string.Empty,
+                Tags = new string?[0],
+                CreatedDateOn = DateTime.Now.Date.ToLongDateString(),
+                ModifiedDateOn = DateTime.Now.Date.ToLongDateString()
+            };
+            noteModels.Add(newModel);
+            currentViewingNote = newModel;
+        }
+
+        public void RemoveNote(NoteModel model)
+        {
+            var indexOf = noteModels.IndexOf(model);
+            noteModels.Remove(model);
+            if (noteModels.Count <= 0)
+            {
+                currentViewingNote = null;
+                return;
+            }
+
+            if (indexOf - 1 < 0)
+            {
+                currentViewingNote = noteModels[indexOf];
+                return;
+            }
+
+            currentViewingNote = noteModels[indexOf-1];
+        }
+
+
+        public string RenameIfDuplicate(string title)
+        {
+            var count = 0;
+            var newTitle = title;
+            foreach (var note in noteModels)
+            {
+                if (note.Title == newTitle)
+                {
+                    count++;
+                    newTitle = $"{title} ({count})";
+                }
+            }
+
+            if (count == 0) return title;
+            return newTitle;
         }
     }
 }

@@ -9,26 +9,36 @@
     <div class="interface-header container-fluid text-end bg-light-gray">
         <div class="display-6 fw-semibold me-4">Notes</div>
     </div>
-    <div class="pt-4">
-        <div class="container-fluid d-flex mb-4" id="toolbar">
+    <div class="bd-interface-body pt-4">
+        <div class="container-fluid mb-4" id="toolbar">
             <div class="btn-toolbar" role="toolbar" aria-label="SearchBar" >
                 <div class="input-group">
                         <input type="text" class="form-control rounded-pill" placeholder="Search" aria-label="Searchbar"  style="width: 20em;">
                 </div>
             </div>
+            <div class="btn btn-primary d-inline-flex text-center mt-2" @onclick="() => NoteService.AddNewNote()">
+                <i class="bi bi-plus"></i>
+                <div class="fs-6">New Note</div>
+            </div>
         </div>
         <div class="container-fluid row flex-row d-flex pt-3">
             <div class="col list-group list-group-flush" style="overflow-y: scroll; height: 48rem;">
                 <!--Note Subjects Here-->
-                @{
-                    for(int i = 0; i < NoteService.noteModels.Length; i++)
+                @if (NoteService.noteModels.Count == 0)
+                {
+                    <div class="fs-5 text-muted p-4">There's No Notes Provided. You can add one by clicking on &quot;New Note&quot;</div>
+                }
+
+                @if(NoteService.noteModels.Count > 0)
+                {
+                    for(int i = 0; i < NoteService.noteModels.Count; i++)
                     {
                         var note = NoteService.noteModels[i];
                         var title = note.Title;
                         var subtitle = note.Subtitle;
 
                         <button class="list-group-item text-start p-2 search-entry" @onclick="() => NoteService.SetAsCurrentViewing(note)">
-                            <div class="data-time fs-6 text-muted">Created On: @DateTime.Now.Date.ToLongDateString()</div>
+                            <div class="data-time fs-6 text-muted">Created On: @note.CreatedDateOn</div>
                             <h3 class="fs-3 fw-semibold pt-2">@title</h3>
                             <h4 class="fs-4 text-truncate text-muted">@subtitle</h4>
                             <!--Note Tags-->
@@ -39,24 +49,69 @@
                                     <div class="badge rounded-pill bg-gray ms-1 me-1">@tag</div>
                                 }
                             }
+                            <div class="btn btn-danger d-inline-flex float-end mt-4" @onclick="ConfirmNoteDeletionShow"><i class="bi bi-trash float-end"></i></div>
                         </button>
                     }
                 }
             </div>
             <div class="col-md-8" style="display: flex; overflow-y: hidden; height: 48rem;">
-                <div class="container-lg" Model="@NoteService.currentViewingNote?">
-                    <h2 class="fs-2 fw-semibold">@NoteService.currentViewingNote?.Title</h2>
-                    <h5 class="text-muted">@NoteService.currentViewingNote?.Subtitle</h5>
-                    <textarea type="text" class="text-muted fs-5 pt-3 container-fluid" placeholder="Type in Note Contents" id="note-contents" style="border: hidden; resize: none;  height: 42rem; overflow: inherit; outline: none;" @bind="NoteService.currentViewingNote.Content"/>
+                <div class="container-lg">
+                    @if (NoteService.currentViewingNote != null)
+                    {
+                        <input class="fs-2 fw-semibold d-flex w-100" style="border: none; outline:none;" role="textbox" placeholder="Untitled" @bind="@NoteService.currentViewingNote.Title"/>
+                        <input class="fs-4 text-muted pt-2 d-flex w-100" style="border: none; outline:none;" role="textbox" placeholder="Topic" @bind=@NoteService.currentViewingNote.Subtitle/>
+                        <textarea type="text" class=" text-muted fs-5 pt-4 container-fluid" placeholder="Type in Note Contents" id="note-contents" style ="border: hidden; resize: none; outline: none; height: 40rem;" @bind="Content"/>
+                    }
                 </div>
             </div>
         </div>
+        <Modal @ref=_noteDeleteModal
+        IsVerticallyCentered=true >
+            <HeaderTemplate>
+                Deleting &quot;@NoteService.currentViewingNote?.Title&quot;.    
+            </HeaderTemplate>
+            <BodyTemplate>
+                Are you sure you wish to delete &quot;@NoteService.currentViewingNote?.Title&quot;?
+            </BodyTemplate>
+            <FooterTemplate>
+                <div class="btn btn-danger" @onclick="() => ConfirmNoteDeletionHide(NoteService.currentViewingNote)">Delete This</div>
+                <div class="btn btn-secondary" @onclick="() => ConfirmNoteDeletionHide(null)">Cancel</div>
+            </FooterTemplate>
+        </Modal>
     </div>
 </div>
 
 @code {
+    Modal? _noteDeleteModal;
+    string Content
+    {
+        get
+        {
+            return NoteService.currentViewingNote?.Content;
+        }
+        set
+        {
+            NoteService.currentViewingNote!.Content = value;
+        }
+    }
+
     protected override void OnInitialized()
     {
         MainLayout.ChangeHeaderName("Notes");
+    }
+
+    private async Task ConfirmNoteDeletionShow()
+    {
+        await _noteDeleteModal?.ShowAsync()!;
+    }
+
+    private async Task ConfirmNoteDeletionHide(NoteModel? note)
+    {
+        await _noteDeleteModal?.HideAsync()!;
+
+        // If there's no note passed in, we can't delete anything
+        if (note == null) return;
+
+        NoteService.RemoveNote(note);
     }
 }

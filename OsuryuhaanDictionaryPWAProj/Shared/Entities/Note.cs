@@ -11,5 +11,7 @@ namespace OsuryuhaanDictionaryPWAProj.Server.Entities
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? Content { get; set; }
+        public string? CreatedOnDate { get; set; }
+        public string? ModifiedOnDate { get; set; }
     }
 }
